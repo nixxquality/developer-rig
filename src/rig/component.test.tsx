@@ -204,7 +204,7 @@ describe('<RigComponent />', () => {
     const testDialogState = {
       width: 0,
       height: 0,
-      frameSize: 'iPhone X (375x822)',
+      mobileFrameSize: 'iPhone X (375x822)',
       extensionViewType: ExtensionViewType.Mobile
     } as ExtensionViewDialogState;
     const expectedMobileFrameSize = {

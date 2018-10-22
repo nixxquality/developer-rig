@@ -8,7 +8,7 @@ import { ViewTypeImages } from '../constants/img-map';
 import { RadioOption } from './radio-option';
 import { DivOption } from './div-option';
 import * as closeButton from '../img/close_icon.png';
-import { MobileOrientation, DefaultMobileOrientation, MobileSizes } from '../constants/mobile';
+import { MobileOrientation, DefaultMobileOrientation, MobileSizes, DefaultMobileSize } from '../constants/mobile';
 import { getSupportedAnchors, getSupportedPlatforms } from '../core/models/manifest';
 import { ExtensionAnchor, ExtensionMode, ExtensionPlatform, ExtensionViewType } from '../constants/extension-coordinator';
 
@@ -23,6 +23,7 @@ export interface ExtensionViewDialogState {
   extensionViewType: ExtensionAnchor | ExtensionMode | ExtensionPlatform | ExtensionViewType;
   channelId: string;
   frameSize: string;
+  mobileFrameSize: string;
   isChatEnabled: boolean;
   isPopout: boolean;
   viewerType: string;
@@ -44,6 +45,7 @@ export class ExtensionViewDialog extends React.Component<ExtensionViewDialogProp
     isChatEnabled: false,
     isPopout: false,
     frameSize: DefaultOverlaySize,
+    mobileFrameSize: DefaultMobileSize,
     viewerType: DefaultViewerType,
     x: 0,
     y: 0,
@@ -115,7 +117,7 @@ export class ExtensionViewDialog extends React.Component<ExtensionViewDialogProp
 
   private renderMobileFrameSizeComponents() {
     return Object.keys(MobileSizes).map(key => {
-      return <RadioOption key={key} name="frameSize" value={key} onChange={this.onChange} checked={key === this.state.frameSize} />
+      return <RadioOption key={key} name="mobileFrameSize" value={key} onChange={this.onChange} checked={key === this.state.mobileFrameSize} />
     });
   }
 
@@ -224,7 +226,7 @@ export class ExtensionViewDialog extends React.Component<ExtensionViewDialogProp
                           {this.renderMobileFrameSizeComponents()}
                         </div>
                         <div className='overlay-custom-container'>
-                          <RadioOption className='overlay-custom' name="frameSize" value="Custom" onChange={this.onChange} checked={"Custom" === DefaultIdentityOption} />
+                          <RadioOption className='overlay-custom' name="mobileFrameSize" value="Custom" onChange={this.onChange} checked={"Custom" === DefaultIdentityOption} />
                           <div className='overlay-custom-container'>
                             <div className="custom-subcontainer__input">
                               <label className="inputs__option-label inputs__width-offset"> Width </label>

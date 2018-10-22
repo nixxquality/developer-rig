@@ -101,17 +101,16 @@ export class RigComponent extends React.Component<Props, State> {
   }
 
   public getFrameSizeFromDialog(extensionViewDialogState: ExtensionViewDialogState) {
-    if (extensionViewDialogState.frameSize === 'Custom') {
+    const key = extensionViewDialogState.extensionViewType === ExtensionViewType.Mobile ? 'mobileFrameSize' : 'frameSize';
+    if (extensionViewDialogState[key] === 'Custom') {
       return {
         width: extensionViewDialogState.width,
         height: extensionViewDialogState.height
       };
     }
-    if (extensionViewDialogState.extensionViewType === ExtensionViewType.Mobile) {
-      return MobileSizes[extensionViewDialogState.frameSize];
-    }
 
-    return OverlaySizes[extensionViewDialogState.frameSize];
+    const sizes = extensionViewDialogState.extensionViewType === ExtensionViewType.Mobile ? MobileSizes : OverlaySizes;''
+    return sizes[extensionViewDialogState[key]];
   }
 
   public createExtensionView = async (extensionViewDialogState: ExtensionViewDialogState) => {
